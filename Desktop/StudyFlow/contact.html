@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - StudyFlow</title>
+
+    <!-- Tailwind -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <link rel="stylesheet" href="planner.css">
+</head>
+
+<body class="min-h-screen">
+    <div id="vanta-bg"></div>
+
+    <!-- NAVBAR -->
+    <nav
+        class="bg-[rgb(11,18,32)]/80 backdrop-blur-md border-b border-white/10 fixed w-full z-50 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-6 py-3 flex justify-between items-center">
+            <!-- Logo -->
+            <div class="flex items-center gap-2 text-teal-400 font-bold text-2xl">
+                <i class="fas fa-graduation-cap"></i>
+                StudyFlow
+            </div>
+
+            <!-- Desktop Navigation -->
+            <div class="hidden md:flex items-center space-x-8">
+                <a href="planner.html"
+                    class="text-gray-300 hover:text-white hover:text-teal-400 font-medium transition-colors">
+                    <i class="fas fa-home mr-1"></i>Home
+                </a>
+                <a href="#plans"
+                    class="text-gray-300 hover:text-white hover:text-teal-400 font-medium transition-colors">
+                    <i class="fas fa-calendar-alt mr-1"></i>Study Plans
+                </a>
+                <a href="#progress"
+                    class="text-gray-300 hover:text-white hover:text-teal-400 font-medium transition-colors">
+                    <i class="fas fa-chart-line mr-1"></i>Progress
+                </a>
+                <a href="#timer"
+                    class="text-gray-300 hover:text-white hover:text-teal-400 font-medium transition-colors">
+                    <i class="fas fa-clock mr-1"></i>Timer
+                </a>
+                <button id="themeToggle" class="theme-toggle" title="Switch Theme">
+                    <i class="fas fa-sun"></i>
+                </button>
+                <a href="auth.html"
+                    class="bg-emerald-500 text-white px-4 py-2 rounded-lg hover:bg-emerald-600 transition-colors font-medium">
+                    <i class="fas fa-user mr-1"></i>Sign In
+                </a>
+            </div>
+
+            <!-- Mobile Menu Button -->
+            <button id="mobile-menu-btn" class="md:hidden text-gray-300 hover:text-white">
+                <i class="fas fa-bars text-xl"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Navigation -->
+        <div id="mobile-menu" class="md:hidden bg-slate-900/95 border-t border-white/10 nav-mobile hidden">
+            <div class="px-6 py-4 space-y-4">
+                <a href="planner.html" class="block text-gray-300 hover:text-teal-400 font-medium py-2">
+                    <i class="fas fa-home mr-2"></i>Home
+                </a>
+                <a href="#plans" class="block text-gray-300 hover:text-teal-400 font-medium py-2">
+                    <i class="fas fa-calendar-alt mr-2"></i>Study Plans
+                </a>
+                <a href="#progress" class="block text-gray-300 hover:text-teal-400 font-medium py-2">
+                    <i class="fas fa-chart-line mr-2"></i>Progress
+                </a>
+                <a href="#timer" class="block text-gray-300 hover:text-teal-400 font-medium py-2">
+                    <i class="fas fa-clock mr-2"></i>Timer
+                </a>
+                <button id="themeToggle"
+                    class="theme-toggle w-full justify-start text-left text-gray-300 hover:text-teal-400 font-medium py-2">
+                    <i class="fas fa-sun mr-2"></i>Theme
+                </button>
+                <a href="auth.html"
+                    class="block bg-emerald-500 text-white px-4 py-2 rounded-lg hover:bg-emerald-600 transition-colors font-medium text-center">
+                    <i class="fas fa-user mr-2"></i>Sign In
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- MAIN CONTENT -->
+    <div class="pt-28 pb-16 px-4">
+        <div class="max-w-6xl mx-auto">
+            <!-- Header -->
+            <div class="text-center mb-12">
+                <h1 class="text-4xl font-bold text-white mb-4">
+                    <i class="fas fa-envelope text-teal-400 mr-3"></i>
+                    Contact Us
+                </h1>
+                <p class="text-gray-300 text-lg">Get in touch with our team. We're here to help you succeed in your
+                    learning journey.</p>
+            </div>
+
+            <div class="grid lg:grid-cols-2 gap-12">
+                <!-- Contact Information -->
+                <div class="space-y-8">
+                    <div class="bg-white/10 backdrop-blur-lg rounded-2xl p-8 border border-white/20 shadow-2xl">
+                        <h2 class="text-2xl font-bold text-white mb-6 flex items-center">
+                            <i class="fas fa-info-circle text-amber-400 mr-3"></i>
+                            Get In Touch
+                        </h2>
+
+                        <div class="space-y-6">
+                            <!-- Email -->
+                            <div class="flex items-start space-x-4">
+                                <div class="bg-teal-500/20 p-3 rounded-lg">
+                                    <i class="fas fa-envelope text-teal-400 text-xl"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-lg font-semibold text-white mb-1">Email Support</h3>
+                                    <p class="text-gray-300 mb-2">For general inquiries and support</p>
+                                    <a href="mailto:support@studyflow.com"
+                                        class="text-teal-400 hover:text-teal-300 transition-colors">
+                                        support@studyflow.com
+                                    </a>
+                                </div>
+                            </div>
+
+                            <!-- Business Inquiries -->
+                            <div class="flex items-start space-x-4">
+                                <div class="bg-green-500/20 p-3 rounded-lg">
+                                    <i class="fas fa-briefcase text-green-400 text-xl"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-lg font-semibold text-white mb-1">Business Inquiries</h3>
+                                    <p class="text-gray-300 mb-2">Partnerships and enterprise solutions</p>
+                                    <a href="mailto:business@studyflow.com"
+                                        class="text-green-400 hover:text-green-300 transition-colors">
+                                        business@studyflow.com
+                                    </a>
+                                </div>
+                            </div>
+
+                            <!-- Technical Support -->
+                            <div class="flex items-start space-x-4">
+                                <div class="bg-orange-500/20 p-3 rounded-lg">
+                                    <i class="fas fa-tools text-orange-400 text-xl"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-lg font-semibold text-white mb-1">Technical Support</h3>
+                                    <p class="text-gray-300 mb-2">Bug reports and technical issues</p>
+                                    <a href="mailto:tech@studyflow.com"
+                                        class="text-orange-400 hover:text-orange-300 transition-colors">
+                                        tech@studyflow.com
+                                    </a>
+                                </div>
+                            </div>
+
+                            <!-- Phone -->
+                            <div class="flex items-start space-x-4">
+                                <div class="bg-cyan-500/20 p-3 rounded-lg">
+                                    <i class="fas fa-phone text-cyan-400 text-xl"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-lg font-semibold text-white mb-1">Phone Support</h3>
+                                    <p class="text-gray-300 mb-2">Available Monday-Friday, 9 AM - 6 PM EST</p>
+                                    <a href="tel:+1-555-STUDYFLOW"
+                                        class="text-cyan-400 hover:text-cyan-300 transition-colors">
+                                        +1 (555) STUDYFLOW
+                                    </a>
+                                </div>
+                            </div>
+
+                            <!-- Address -->
+                            <div class="flex items-start space-x-4">
+                                <div class="bg-red-500/20 p-3 rounded-lg">
+                                    <i class="fas fa-map-marker-alt text-red-400 text-xl"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-lg font-semibold text-white mb-1">Office Address</h3>
+                                    <p class="text-gray-300">
+                                        StudyFlow Headquarters<br>
+                                        123 Learning Street<br>
+                                        Education City, EC 12345<br>
+                                        United States
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Response Time -->
+                    <div class="bg-white/5 backdrop-blur-lg rounded-2xl p-6 border border-white/10">
+                        <h3 class="text-xl font-bold text-white mb-4 flex items-center">
+                            <i class="fas fa-clock text-yellow-400 mr-2"></i>
+                            Response Times
+                        </h3>
+                        <div class="space-y-3">
+                            <div class="flex justify-between items-center">
+                                <span class="text-gray-300">Email Support</span>
+                                <span class="text-green-400 font-semibold">Within 24 hours</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span class="text-gray-300">Technical Issues</span>
+                                <span class="text-orange-400 font-semibold">Within 12 hours</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span class="text-gray-300">Phone Support</span>
+                                <span class="text-amber-400 font-semibold">Immediate</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contact Form -->
+                <div
+                    class="bg-white/10 backdrop-blur-lg rounded-2xl p-8 border border-white/20 shadow-2xl relative overflow-hidden">
+                    <!-- Decorative background elements -->
+                    <div
+                        class="absolute top-0 right-0 w-32 h-32 bg-teal-500/10 rounded-full -translate-y-16 translate-x-16">
+                    </div>
+                    <div
+                        class="absolute bottom-0 left-0 w-24 h-24 bg-amber-500/10 rounded-full translate-y-12 -translate-x-12">
+                    </div>
+
+                    <div class="relative z-10">
+                        <h2 class="text-2xl font-bold text-white mb-2 flex items-center">
+                            <i class="fas fa-paper-plane text-teal-400 mr-3"></i>
+                            Send us a Message
+                        </h2>
+                        <p class="text-gray-400 text-sm mb-6">Fill out the form below and we'll get back to you as soon
+                            as possible.</p>
+
+                        <form id="contactForm" class="space-y-6">
+                            <div class="grid md:grid-cols-2 gap-6">
+                                <div class="form-group">
+                                    <label class="block text-sm font-medium text-gray-300 mb-2 flex items-center">
+                                        <i class="fas fa-user mr-2 text-teal-400"></i>
+                                        First Name *
+                                    </label>
+                                    <div class="relative">
+                                        <input type="text" id="firstName" required
+                                            class="w-full px-4 py-3 pl-4 bg-slate-800/60 border border-slate-600 rounded-xl focus:outline-none focus:border-teal-400 focus:bg-slate-700/60 focus:ring-2 focus:ring-teal-400/20 text-white placeholder-gray-400 transition-all duration-300 backdrop-blur-sm">
+                                        <div
+                                            class="absolute inset-0 rounded-xl bg-gradient-to-r from-teal-500/5 to-transparent pointer-events-none">
+                                        </div>
+                                    </div>
+                                    <div class="error-message text-red-400 text-xs mt-1 hidden">
+                                        <i class="fas fa-exclamation-circle mr-1"></i>
+                                        First name is required
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="block text-sm font-medium text-gray-300 mb-2 flex items-center">
+                                        <i class="fas fa-user mr-2 text-teal-400"></i>
+                                        Last Name *
+                                    </label>
+                                    <div class="relative">
+                                        <input type="text" id="lastName" required
+                                            class="w-full px-4 py-3 pl-4 bg-slate-800/60 border border-slate-600 rounded-xl focus:outline-none focus:border-teal-400 focus:bg-slate-700/60 focus:ring-2 focus:ring-teal-400/20 text-white placeholder-gray-400 transition-all duration-300 backdrop-blur-sm">
+                                        <div
+                                            class="absolute inset-0 rounded-xl bg-gradient-to-r from-teal-500/5 to-transparent pointer-events-none">
+                                        </div>
+                                    </div>
+                                    <div class="error-message text-red-400 text-xs mt-1 hidden">
+                                        <i class="fas fa-exclamation-circle mr-1"></i>
+                                        Last name is required
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="block text-sm font-medium text-gray-300 mb-2 flex items-center">
+                                    <i class="fas fa-envelope mr-2 text-teal-400"></i>
+                                    Email Address *
+                                </label>
+                                <div class="relative">
+                                    <input type="email" id="email" required
+                                        class="w-full px-4 py-3 pl-4 bg-slate-800/60 border border-slate-600 rounded-xl focus:outline-none focus:border-teal-400 focus:bg-slate-700/60 focus:ring-2 focus:ring-teal-400/20 text-white placeholder-gray-400 transition-all duration-300 backdrop-blur-sm">
+                                    <div
+                                        class="absolute inset-0 rounded-xl bg-gradient-to-r from-teal-500/5 to-transparent pointer-events-none">
+                                    </div>
+                                </div>
+                                <div class="error-message text-red-400 text-xs mt-1 hidden">
+                                    <i class="fas fa-exclamation-circle mr-1"></i>
+                                    Please enter a valid email address
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="block text-sm font-medium text-gray-300 mb-2 flex items-center">
+                                    <i class="fas fa-tag mr-2 text-teal-400"></i>
+                                    Subject *
+                                </label>
+                                <div class="relative">
+                                    <select id="subject" required
+                                        class="w-full px-4 py-3 pl-4 bg-slate-800/60 border border-slate-600 rounded-xl focus:outline-none focus:border-teal-400 focus:bg-slate-700/60 focus:ring-2 focus:ring-teal-400/20 text-white transition-all duration-300 backdrop-blur-sm appearance-none">
+                                        <option value="" class="bg-slate-800 text-gray-400">Select a subject</option>
+                                        <option value="general" class="bg-slate-800 text-white">General Inquiry</option>
+                                        <option value="technical" class="bg-slate-800 text-white">Technical Support
+                                        </option>
+                                        <option value="billing" class="bg-slate-800 text-white">Billing & Payments
+                                        </option>
+                                        <option value="partnership" class="bg-slate-800 text-white">Partnership
+                                            Opportunities</option>
+                                        <option value="feedback" class="bg-slate-800 text-white">Feedback & Suggestions
+                                        </option>
+                                        <option value="other" class="bg-slate-800 text-white">Other</option>
+                                    </select>
+                                    <div
+                                        class="absolute inset-0 rounded-xl bg-gradient-to-r from-teal-500/5 to-transparent pointer-events-none">
+                                    </div>
+                                    <div
+                                        class="absolute right-3 top-1/2 transform -translate-y-1/2 text-teal-400 pointer-events-none">
+                                        <i class="fas fa-chevron-down"></i>
+                                    </div>
+                                </div>
+                                <div class="error-message text-red-400 text-xs mt-1 hidden">
+                                    <i class="fas fa-exclamation-circle mr-1"></i>
+                                    Please select a subject
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="block text-sm font-medium text-gray-300 mb-2 flex items-center">
+                                    <i class="fas fa-comment mr-2 text-teal-400"></i>
+                                    Message *
+                                </label>
+                                <div class="relative">
+                                    <textarea id="message" rows="6" required
+                                        placeholder="Tell us how we can help you. Please provide as much detail as possible about your inquiry."
+                                        class="w-full px-4 py-3 pl-4 bg-slate-800/60 border border-slate-600 rounded-xl focus:outline-none focus:border-teal-400 focus:bg-slate-700/60 focus:ring-2 focus:ring-teal-400/20 text-white placeholder-gray-400 transition-all duration-300 backdrop-blur-sm resize-none"></textarea>
+                                    <div
+                                        class="absolute inset-0 rounded-xl bg-gradient-to-r from-teal-500/5 to-transparent pointer-events-none">
+                                    </div>
+                                </div>
+                                <div class="error-message text-red-400 text-xs mt-1 hidden">
+                                    <i class="fas fa-exclamation-circle mr-1"></i>
+                                    Please enter your message
+                                </div>
+                            </div>
+
+                            <div class="p-4 bg-slate-800/30 rounded-xl border border-slate-600/30">
+                                <label for="newsletter" class="flex items-start space-x-3 cursor-pointer">
+                                    <input type="checkbox" id="newsletter"
+                                        class="mt-1 w-4 h-4 text-emerald-600 bg-slate-800 border-slate-600 rounded focus:ring-emerald-500 focus:ring-2 flex-shrink-0">
+                                    <span class="text-sm text-gray-300 leading-relaxed ml-3">
+                                        <span class="font-medium">Stay Updated:</span> I would like to receive updates
+                                        about new features and educational tips from StudyFlow.
+                                    </span>
+                                </label>
+                            </div>
+
+                            <button type="submit" id="submitBtn"
+                                class="w-full bg-gradient-to-r from-emerald-500 via-teal-600 to-teal-700 text-white py-4 px-6 rounded-xl font-semibold hover:from-emerald-600 hover:via-teal-700 hover:to-teal-800 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-[1.02] flex items-center justify-center group relative overflow-hidden">
+                                <div
+                                    class="absolute inset-0 bg-gradient-to-r from-emerald-400/20 to-teal-600/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                </div>
+                                <i
+                                    class="fas fa-paper-plane mr-2 group-hover:translate-x-1 transition-transform duration-300"></i>
+                                <span class="relative z-10">Send Message</span>
+                                <div
+                                    class="absolute inset-0 rounded-xl bg-white/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                </div>
+                            </button>
+                        </form>
+
+                        <!-- Success/Error Messages -->
+                        <div id="formMessage" class="mt-6 hidden animate-fadeIn">
+                            <div class="p-4 rounded-xl border backdrop-blur-sm flex items-center space-x-3">
+                                <div class="flex-shrink-0">
+                                    <i class="fas fa-check-circle text-green-400 text-lg"></i>
+                                </div>
+                                <p class="text-sm text-green-400 font-medium"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FAQ Section -->
+            <div class="mt-16 bg-white/5 backdrop-blur-lg rounded-2xl p-8 border border-white/10">
+                <h2 class="text-2xl font-bold text-white mb-8 text-center flex items-center justify-center">
+                    <i class="fas fa-question-circle text-teal-400 mr-3"></i>
+                    Frequently Asked Questions
+                </h2>
+
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div class="space-y-6">
+                        <div>
+                            <h3 class="text-lg font-semibold text-white mb-2">How quickly will I receive a response?
+                            </h3>
+                            <p class="text-gray-300">We typically respond to all inquiries within 24 hours during
+                                business days. Technical support issues are prioritized and may receive faster
+                                responses.</p>
+                        </div>
+
+                        <div>
+                            <h3 class="text-lg font-semibold text-white mb-2">Do you offer phone support?</h3>
+                            <p class="text-gray-300">Yes, our phone support is available Monday through Friday, 9 AM to
+                                6 PM Eastern Time. Premium subscribers receive priority phone support.</p>
+                        </div>
+
+                        <div>
+                            <h3 class="text-lg font-semibold text-white mb-2">Can I request new features?</h3>
+                            <p class="text-gray-300">Absolutely! We love hearing from our users. Use the contact form
+                                above or email us at feedback@studyflow.com to share your ideas and suggestions.</p>
+                        </div>
+                    </div>
+
+                    <div class="space-y-6">
+                        <div>
+                            <h3 class="text-lg font-semibold text-white mb-2">How do I report a bug?</h3>
+                            <p class="text-gray-300">Please use our technical support email (tech@studyflow.com) or the
+                                contact form with detailed information about the issue you're experiencing.</p>
+                        </div>
+
+                        <div>
+                            <h3 class="text-lg font-semibold text-white mb-2">Do you offer training or tutorials?</h3>
+                            <p class="text-gray-300">Yes, we provide comprehensive tutorials, video guides, and
+                                documentation. Visit our Help Center or contact us for personalized training sessions.
+                            </p>
+                        </div>
+
+                        <div>
+                            <h3 class="text-lg font-semibold text-white mb-2">How do I delete my account?</h3>
+                            <p class="text-gray-300">Account deletion requests can be made through your account settings
+                                or by contacting our support team. We'll process your request within 30 days.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="bg-gray-900 text-white py-12 mt-16">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <!-- Brand Section -->
+                <div class="col-span-1 md:col-span-2">
+                    <a href="landing.html" class="flex items-center gap-2 mb-4 hover:opacity-80 transition-opacity">
+                        <i class="fas fa-graduation-cap text-teal-400 text-2xl"></i>
+                        <span class="text-xl font-bold">StudyFlow</span>
+                    </a>
+                    <p class="text-gray-300 mb-4 max-w-md">
+                        Empowering students with intelligent study planning and time management tools.
+                        Achieve your academic goals with personalized learning strategies.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="https://www.facebook.com/" class="text-gray-400 hover:text-teal-400 transition-colors">
+                            <i class="fab fa-facebook-f text-lg"></i>
+                        </a>
+                        <a href="https://x.com/?lang=en" class="text-gray-400 hover:text-teal-400 transition-colors">
+                            <i class="fab fa-twitter text-lg"></i>
+                        </a>
+                        <a href="https://www.instagram.com/"
+                            class="text-gray-400 hover:text-teal-400 transition-colors">
+                            <i class="fab fa-instagram text-lg"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Quick Links -->
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Quick Links</h3>
+                    <ul class="space-y-2">
+                        <li><a href="planner.html" class="text-gray-400 hover:text-white transition-colors">Home</a>
+                        </li>
+                        <li><a href="study plans.html" class="text-gray-400 hover:text-white transition-colors">Study
+                                Plans</a>
+                        </li>
+                        <li><a href="progress.html"
+                                class="text-gray-400 hover:text-white transition-colors">Progress</a>
+                        </li>
+                        <li><a href="timer.html" class="text-gray-400 hover:text-white transition-colors">Pomodoro
+                                Timer</a>
+                        </li>
+                        <li><a href="auth.html" class="text-gray-400 hover:text-white transition-colors">Sign In</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Features -->
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Legal</h3>
+                    <ul class="space-y-2">
+                        <li><a href="privacy.html" class="text-gray-400 hover:text-white transition-colors">Privacy
+                                Policy</a></li>
+                        <li><a href="terms.html" class="text-gray-400 hover:text-white transition-colors">Terms of
+                                Service</a></li>
+                        <li><a href="contact.html" class="text-gray-400 hover:text-white transition-colors">Contact
+                                Us</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Bottom Section -->
+            <div class="border-t border-gray-800 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <div class="text-gray-400 text-sm mb-4 md:mb-0">
+                    © 2024 StudyFlow. All rights reserved.
+                </div>
+                <div class="flex space-x-6 text-sm">
+                    <a href="privacy.html" class="text-gray-400 hover:text-white transition-colors">Privacy Policy</a>
+                    <a href="terms.html" class="text-gray-400 hover:text-white transition-colors">Terms of Service</a>
+                    <a href="contact.html" class="text-gray-400 hover:text-white transition-colors">Contact Us</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="contact.js"></script>
+
+    <script>
+        document.getElementById('mobile-menu-btn')?.addEventListener('click', () => {
+            document.getElementById('mobile-menu')?.classList.toggle('hidden');
+        });
+    </script>
+
+    <!-- Theme Script -->
+    <script src="theme.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,132 @@
+CSS ANALYSIS REPORT
+===================
+
+1. DUPLICATE CSS RULES
+-----------------------
+
+A. .theme-toggle (3 definitions - 2 duplicates)
+   - planner.css (lines 124-155)
+   - landing.css (lines 283-303)  
+   - progress.css (lines 444-478)
+   
+   Issues:
+   - planner.css uses var(--accent-primary) but progress.css uses #10B981 directly
+   - landing.css uses hardcoded colors (#14B8A6, #0F766E)
+   - Different box-shadow definitions
+   
+B. .nav-mobile (3 definitions - 2 duplicates)
+   - planner.css (lines 969-984)
+   - progress.css (lines 489-531)
+   - progress.css (lines 516-531) - DUPLICATE within same file!
+   
+C. .testimonial-card (2 definitions - 1 duplicate)
+   - CircularGallery.css (lines 1-8)
+   - landing.css (lines 230-243)
+   
+   Note: landing.css has more comprehensive styling for testimonials
+
+2. UNUSED CSS CLASSES
+----------------------
+
+These CSS classes are defined but NOT used in any HTML files:
+
+From auth.css:
+- .auth-button-container
+- .auth-container (actually used in auth.html but check)
+- .auth-container::before
+- .auth-footer
+- .auth-subtitle
+- .auth-title
+- .bg-shape-1, .bg-shape-2, .bg-shape-3 (animated background elements)
+- .google-auth-btn
+- .google-icon
+
+From CircularGallery.css:
+- .testimonials-slider (actually used in landing.html)
+- .testimonials-track (actually used in landing.html)
+
+From planner.css:
+- .content-decoration-1, .content-decoration-2, .content-decoration-3
+- .btn-accent (possibly unused)
+- Various text color classes
+
+From progress.css:
+- .checkbox-custom.checked::after
+- Various card and UI components
+
+3. COLOR INCONSISTENCIES WITH NEW PALETTE
+-----------------------------------------
+
+A. Non-Palette Colors Found:
+   - #14B8A6 (teal-400) - Used in landing.css (should be #0F766E or #14b8a6)
+   - #334155 - Used in planner.css for --text-label
+   - #112240 - Used in planner.css for --bg-secondary
+   - #0a1628 - Used in planner.css for --bg-primary
+   - #f8f9fa - Used in auth.css for gradient (close to #F8FAFC)
+   - #F1F5F9 - Used in landing.css (should be #F8FAFC)
+   - #0F172A - Used in landing.css as --text-primary
+
+B. Palette Verification:
+   ✅ Primary: #10B981 - Used extensively
+   ✅ Secondary: #0F766E - Used but less than #14B8A6
+   ✅ Highlight: #F59E0B - Used
+   ✅ Neutral BG: #F8FAFC - Used but also #F1F5F9
+   ✅ Card BG: #FFFFFF - Used
+   ✅ Dark BG: #0B1220 - Used
+   ✅ Dark Card: #111827 - Used
+   ✅ Border Subtle: #1F2937 - Used
+
+4. REDUNDANT/UNNECESSARY CODE
+-----------------------------
+
+A. Empty CSS Files:
+   - timer.css (4 lines - only imports planner.css)
+   - cookie.css (4 lines - only imports planner.css)
+   - contact.css (4 lines - only imports planner.css)
+   - terms.css (4 lines - only imports planner.css)
+   - privacy.css (4 lines - only imports planner.css)
+
+B. Duplicate Import Statements:
+   - study-plans.css imports planner.css
+   - timer.css imports planner.css
+   - cookie.css imports planner.css
+   - etc.
+   All these pages could use a single shared stylesheet
+
+C. Overspecific Selectors:
+   - landing.css has many [data-theme="light"] and [data-theme="dark"] overrides
+   - Could be simplified with CSS variables
+
+5. SAFELY REMOVABLE ITEMS
+-------------------------
+
+A. From auth.css:
+   - .bg-shape-1, .bg-shape-2, .bg-shape-3 (animated background elements)
+   - Check if .auth-container::before is needed
+
+B. From CircularGallery.css:
+   - Could consolidate into landing.css since testimonials are used there
+
+C. From planner.css:
+   - Duplicate .nav-mobile definitions
+   - .content-decoration-1, .content-decoration-2, .content-decoration-3
+
+D. From progress.css:
+   - Duplicate .nav-mobile definition
+
+E. Empty CSS files (timer.css, cookie.css, contact.css, terms.css, privacy.css):
+   - Could be consolidated into planner.css
+   - Or create a single shared-import.css
+
+6. RECOMMENDATIONS
+------------------
+
+1. Consolidate all theme-toggle definitions into planner.css
+2. Merge CircularGallery.css into landing.css
+3. Remove duplicate nav-mobile definitions
+4. Create a single shared CSS file for pages that only import planner.css
+5. Update colors to match palette:
+   - Replace #14B8A6 with #0F766E or #14b8a6 (if #14B8A6 is intended as variant)
+   - Ensure #F8FAFC is used instead of #F1F5F9 for consistency
+6. Remove unused classes from auth.css (bg-shape elements)
+7. Consolidate test files (terms, privacy, cookie, contact, timer)

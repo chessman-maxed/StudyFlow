@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StudyFlow - AI-Powered Smart Learning Planner</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Manrope:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="landing.css">
+    <link rel="stylesheet" href="CircularGallery.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.net.min.js"></script>
+    <script src="theme.js"></script>
+</head>
+
+<body class="scroll-smooth min-h-screen">
+    <div id="vanta-bg"></div>
+
+    <!-- Header -->
+    <header class="fixed top-0 left-0 right-0 z-50 bg-slate-900/80 backdrop-blur-md border-b border-white/10">
+        <div class="max-w-7xl mx-auto px-6 py-3">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center gap-2">
+                    <div
+                        class="w-8 h-8 bg-gradient-to-br from-emerald-500 to-teal-600 rounded-full flex items-center justify-center text-white font-bold text-sm">
+                        SF
+                    </div>
+                    <span class="font-bold text-xl text-teal-400">StudyFlow</span>
+                </div>
+                <nav class="hidden md:flex space-x-8">
+                    <a href="#features"
+                        class="text-gray-300 hover:text-white hover:text-teal-400 transition-colors font-medium">Features</a>
+                    <a href="#how-it-works"
+                        class="text-gray-300 hover:text-white hover:text-teal-400 transition-colors font-medium">How
+                        it works</a>
+                    <a href="#testimonials"
+                        class="text-gray-300 hover:text-white hover:text-teal-400 transition-colors font-medium">Testimonials</a>
+                </nav>
+                <div class="flex items-center space-x-3">
+                    <button id="cta-button"
+                        class="btn-primary text-white px-6 py-2 rounded-lg font-medium hidden md:inline-block bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 transition-all"
+                        onclick="handleSignupClick()">
+                        Get Started
+                    </button>
+                    <button id="themeToggle" class="theme-toggle hidden md:flex" title="Switch Theme"
+                        onclick="toggleTheme()">
+                        <i class="fas fa-sun text-teal-400"></i>
+                    </button>
+                </div>
+                <button id="mobile-menu-btn" class="md:hidden text-gray-300 focus:outline-none">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Navigation -->
+        <div id="mobile-menu" class="md:hidden bg-slate-900/95 border-t border-white/10 hidden">
+            <div class="px-6 py-4 space-y-4">
+                <a href="#features" class="block text-gray-300 hover:text-teal-400 font-medium py-2">
+                    <i class="fas fa-star mr-2"></i>Features
+                </a>
+                <a href="#how-it-works" class="block text-gray-300 hover:text-teal-400 font-medium py-2">
+                    <i class="fas fa-question-circle mr-2"></i>How it works
+                </a>
+                <a href="#testimonials" class="block text-gray-300 hover:text-teal-400 font-medium py-2">
+                    <i class="fas fa-comments mr-2"></i>Testimonials
+                </a>
+                <button id="cta-button-mobile"
+                    class="w-full text-left text-white px-4 py-2 rounded-lg font-medium bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 transition-all"
+                    onclick="handleSignupClick()">
+                    <i class="fas fa-rocket mr-2"></i>Get Started
+                </button>
+                <button id="themeToggleMobile" onclick="toggleTheme()"
+                    class="theme-toggle w-full justify-start text-left text-gray-300 hover:text-teal-400 font-medium py-2">
+                    <i class="fas fa-sun mr-2"></i>Theme
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-section min-h-screen flex items-center pt-20">
+        <!-- Dynamic Orbs -->
+        <div class="hero-orb hero-orb-1"></div>
+        <div class="hero-orb hero-orb-2"></div>
+        <div class="hero-orb hero-orb-3"></div>
+
+        <div class="container mx-auto px-4">
+            <div class="max-w-4xl mx-auto text-center">
+                <div
+                    class="hero-badge inline-flex items-center justify-center px-4 py-2 mb-6 rounded-full bg-amber-500/20 text-amber-400 font-medium text-sm">
+                    <span class="mr-2">✨</span> AI-Powered Learning
+                </div>
+                <h1 class="hero-title text-5xl md:text-6xl font-bold text-white mb-6 leading-tight">
+                    Smart Study Plans,<br class="hidden md:block">
+                    <span
+                        class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 via-teal-400 to-amber-400">Powered
+                        by AI</span>
+                </h1>
+                <p class="hero-desc text-xl text-gray-300 mb-10 max-w-2xl mx-auto">
+                    Create personalized study plans tailored to your exam dates, weak subjects, and target scores. Study
+                    smarter, not harder.
+                </p>
+                <div class="hero-buttons flex flex-col sm:flex-row justify-center gap-4">
+                    <button id="cta-button-hero"
+                        class="bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white px-8 py-3 rounded-lg font-medium text-lg shadow-lg transition-all hover:shadow-xl hover:-translate-y-0.5"
+                        onclick="handleSignupClick()">
+                        Get Started Free
+                    </button>
+                    <a href="#how-it-works"
+                        class="flex items-center justify-center text-gray-300 font-medium hover:text-white transition-colors px-6 py-3">
+                        <span class="mr-2">See how it works</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd"
+                                d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z"
+                                clip-rule="evenodd" />
+                        </svg>
+                    </a>
+                </div>
+                <div class="hero-demo mt-16 relative">
+                    <div class="relative max-w-3xl mx-auto">
+                        <div
+                            class="bg-white/10 backdrop-blur-md rounded-xl border border-white/20 overflow-hidden shadow-2xl hero-glow">
+                            <div class="p-6">
+                                <div class="flex items-center space-x-3 mb-6">
+                                    <div
+                                        class="w-10 h-10 bg-gradient-to-br from-emerald-500 to-teal-600 rounded-full flex items-center justify-center text-white font-bold">
+                                        SF
+                                    </div>
+                                    <div>
+                                        <h3 class="font-bold text-lg text-white">Your AI Study Plan</h3>
+                                        <p class="text-sm text-gray-400">Generated <span id="generated-time">just
+                                                now</span></p>
+                                    </div>
+                                    <div class="ml-auto">
+                                        <span
+                                            class="px-3 py-1 bg-green-500/20 text-green-400 text-xs font-medium rounded-full">Active</span>
+                                    </div>
+                                </div>
+                                <div class="space-y-3" id="study-subjects">
+                                    <div
+                                        class="flex items-center justify-between p-4 bg-white/5 rounded-lg border border-white/10">
+                                        <div>
+                                            <h4 class="font-medium text-white">Mathematics</h4>
+                                            <p class="text-sm text-gray-400">Focus: Calculus, Algebra</p>
+                                        </div>
+                                        <div class="text-right">
+                                            <div class="text-amber-400 font-medium">4h 30m</div>
+                                            <div class="text-xs text-gray-500" id="math-day">today</div>
+                                        </div>
+                                    </div>
+                                    <div
+                                        class="flex items-center justify-between p-4 bg-white/5 rounded-lg border border-white/10">
+                                        <div>
+                                            <h4 class="font-medium text-white">Physics</h4>
+                                            <p class="text-sm text-gray-400">Focus: Thermodynamics</p>
+                                        </div>
+                                        <div class="text-right">
+                                            <div class="text-teal-400 font-medium">3h 15m</div>
+                                            <div class="text-xs text-gray-500" id="physics-day">tomorrow</div>
+                                        </div>
+                                    </div>
+                                    <div
+                                        class="flex items-center justify-between p-4 bg-white/5 rounded-lg border border-white/10">
+                                        <div>
+                                            <h4 class="font-medium text-white">Chemistry</h4>
+                                            <p class="text-sm text-gray-400">Review: Organic</p>
+                                        </div>
+                                        <div class="text-right">
+                                            <div class="text-green-400 font-medium">2h 45m</div>
+                                            <div class="text-xs text-gray-500" id="chemistry-day">in 2 days</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="mt-6 pt-4 border-t border-white/10">
+                                    <div class="flex justify-between items-center">
+                                        <div>
+                                            <p class="text-sm text-gray-400">Progress to 90% target</p>
+                                            <div class="mt-2 w-full bg-white/10 rounded-full h-2">
+                                                <div class="bg-gradient-to-r from-amber-500 to-emerald-500 h-2 rounded-full"
+                                                    style="width: 65%"></div>
+                                            </div>
+                                        </div>
+                                        <div class="text-right">
+                                            <div class="text-amber-400 font-bold text-lg" id="progress-percent">65%
+                                            </div>
+                                            <div class="text-xs text-gray-500">on track</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div
+                            class="absolute -top-4 -right-4 w-16 h-16 bg-amber-500/30 rounded-full blur-xl floating-animation">
+                        </div>
+                        <div class="absolute -bottom-4 -left-4 w-20 h-20 bg-teal-500/30 rounded-full blur-xl floating-animation"
+                            style="animation-delay: 0.5s;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-20 bg-slate-900/50">
+        <div class="container mx-auto px-4">
+            <div class="max-w-3xl mx-auto text-center mb-16">
+                <h2 class="text-3xl font-bold text-white mb-4">Smart Features for Smarter Learning</h2>
+                <p class="text-xl text-gray-300">StudyFlow adapts to your unique needs with powerful AI-driven tools</p>
+            </div>
+
+            <div class="feature-grid grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                <!-- Feature 1 -->
+                <div
+                    class="bg-white/10 backdrop-blur-sm p-8 rounded-2xl border border-white/10 hover:border-teal-500/50 transition-all duration-300 hover:shadow-xl transform hover:-translate-y-1">
+                    <div
+                        class="w-16 h-16 mb-6 bg-gradient-to-br from-amber-500 to-amber-600 rounded-2xl flex items-center justify-center text-white shadow-lg">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-4">Adaptive Study Plans</h3>
+                    <p class="text-gray-300 leading-relaxed">Get personalized daily schedules that adjust based on your
+                        progress, weak areas, and exam timeline. Our AI analyzes your study patterns, learning speed,
+                        and subject difficulty to create optimal study sessions.</p>
+                </div>
+
+                <!-- Feature 2 -->
+                <div
+                    class="bg-white/10 backdrop-blur-sm p-8 rounded-2xl border border-white/10 hover:border-emerald-500/50 transition-all duration-300 hover:shadow-xl transform hover:-translate-y-1">
+                    <div
+                        class="w-16 h-16 mb-6 bg-gradient-to-br from-emerald-500 to-emerald-600 rounded-2xl flex items-center justify-center text-white shadow-lg">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M13 10V3L4 14h7v7l9-11h-7z" />
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-4">Progress Tracking</h3>
+                    <p class="text-gray-300 leading-relaxed">Monitor your learning journey with comprehensive progress
+                        tracking. View detailed analytics showing study time, topic mastery, and performance trends.</p>
+                </div>
+
+                <!-- Feature 3 -->
+                <div
+                    class="bg-white/10 backdrop-blur-sm p-8 rounded-2xl border border-white/10 hover:border-amber-500/50 transition-all duration-300 hover:shadow-xl transform hover:-translate-y-1">
+                    <div
+                        class="w-16 h-16 mb-6 bg-gradient-to-br from-amber-500 to-amber-600 rounded-2xl flex items-center justify-center text-white shadow-lg">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-4">Focus Optimization</h3>
+                    <p class="text-gray-300 leading-relaxed">Our intelligent algorithms analyze your performance data to
+                        identify knowledge gaps and learning patterns. StudyFlow prioritizes difficult topics while
+                        ensuring balanced coverage of all subjects.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How it works -->
+    <section id="how-it-works" class="py-20 bg-slate-900">
+        <div class="container mx-auto px-4">
+            <div class="max-w-3xl mx-auto text-center mb-16">
+                <h2 class="text-3xl font-bold text-white mb-4">How StudyFlow Works</h2>
+                <p class="text-xl text-gray-300">Three simple steps to your personalized study plan</p>
+            </div>
+
+            <div class="max-w-4xl mx-auto">
+                <div class="relative">
+                    <!-- Step 1 -->
+                    <div class="flex mb-10">
+                        <div
+                            class="flex-shrink-0 w-12 h-12 bg-amber-500/20 rounded-full flex items-center justify-center text-amber-400 font-bold z-10">
+                            1
+                        </div>
+                        <div class="flex-1 ml-4 p-6 rounded-xl bg-white/10 backdrop-blur-sm border border-white/10">
+                            <h3 class="text-xl font-bold text-white mb-2">Tell Us About Your Exam</h3>
+                            <p class="text-gray-300">Enter your exam date, subjects, current performance, and target
+                                score. The more details you provide, the better we can tailor your plan.</p>
+                        </div>
+                    </div>
+
+                    <!-- Step 2 -->
+                    <div class="flex mb-10">
+                        <div
+                            class="flex-shrink-0 w-12 h-12 bg-teal-500/20 rounded-full flex items-center justify-center text-teal-400 font-bold z-10">
+                            2
+                        </div>
+                        <div class="flex-1 ml-4 p-6 rounded-xl bg-white/10 backdrop-blur-sm border border-white/10">
+                            <h3 class="text-xl font-bold text-white mb-2">Get Your Smart Plan</h3>
+                            <p class="text-gray-300">Our AI analyzes your inputs and generates a customized study
+                                schedule that optimizes your time and focuses on your weak areas.</p>
+                        </div>
+                    </div>
+
+                    <!-- Step 3 -->
+                    <div class="flex">
+                        <div
+                            class="flex-shrink-0 w-12 h-12 bg-green-500/20 rounded-full flex items-center justify-center text-green-400 font-bold z-10">
+                            3
+                        </div>
+                        <div class="flex-1 ml-4 p-6 rounded-xl bg-white/10 backdrop-blur-sm border border-white/10">
+                            <h3 class="text-xl font-bold text-white mb-2">Track & Adapt</h3>
+                            <p class="text-gray-300">Follow your plan and watch your progress. StudyFlow adjusts as you
+                                go, ensuring you stay on track to hit your target score.</p>
+                        </div>
+                    </div>
+
+                    <!-- Vertical line -->
+                    <div class="absolute left-6 top-0 bottom-0 w-0.5 bg-white/10 ml-3"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section id="testimonials" class="py-20 bg-slate-900/50 overflow-hidden">
+        <div class="container mx-auto px-4">
+            <div class="max-w-3xl mx-auto text-center mb-16">
+                <h2 class="text-3xl font-bold text-white mb-4">Loved by Students Worldwide</h2>
+                <p class="text-xl text-gray-300">Join thousands who have transformed their study habits</p>
+            </div>
+
+            <div class="testimonials-slider">
+                <div class="testimonials-track">
+                    <!-- Original 6 cards -->
+                    <div class="testimonial-card bg-white/10 backdrop-blur-sm border border-white/10">
+                        <div class="flex items-center mb-4">
+                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop"
+                                alt="James Wilson" class="w-12 h-12 rounded-full mr-4 object-cover">
+                            <div>
+                                <h4 class="font-bold text-white">James Wilson</h4>
+                                <p class="text-sm text-gray-400">SAT Prep, New York</p>
+                            </div>
+                        </div>
+                        <p class="text-gray-300 italic">"Scored 1520 on SAT! Got accepted into Stanford!"</p>
+                    </div>
+                    <div class="testimonial-card bg-white/10 backdrop-blur-sm border border-white/10">
+                        <div class="flex items-center mb-4">
+                            <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop"
+                                alt="Emma Schmidt" class="w-12 h-12 rounded-full mr-4 object-cover">
+                            <div>
+                                <h4 class="font-bold text-white">Emma Schmidt</h4>
+                                <p class="text-sm text-gray-400">MCAT Prep, Berlin</p>
+                            </div>
+                        </div>
+                        <p class="text-gray-300 italic">"Went from 498 to 518 on MCAT! Heading to Harvard Medical!"</p>
+                    </div>
+                    <div class="testimonial-card bg-white/10 backdrop-blur-sm border border-white/10">
+                        <div class="flex items-center mb-4">
+                            <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=100&h=100&fit=crop"
+                                alt="Michael Chen" class="w-12 h-12 rounded-full mr-4 object-cover">
+                            <div>
+                                <h4 class="font-bold text-white">Michael Chen</h4>
+                                <p class="text-sm text-gray-400">CFA Candidate, Singapore</p>
+                            </div>
+                        </div>
+                        <p class="text-gray-300 italic">"Passed all 3 CFA levels on first attempt!"</p>
+                    </div>
+                    <div class="testimonial-card bg-white/10 backdrop-blur-sm border border-white/10">
+                        <div class="flex items-center mb-4">
+                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop"
+                                alt="Sarah Johnson" class="w-12 h-12 rounded-full mr-4 object-cover">
+                            <div>
+                                <h4 class="font-bold text-white">Sarah Johnson</h4>
+                                <p class="text-sm text-gray-400">GRE Prep, London</p>
+                            </div>
+                        </div>
+                        <p class="text-gray-300 italic">"Scored 338 on GRE! Got into Oxford!"</p>
+                    </div>
+                    <div class="testimonial-card bg-white/10 backdrop-blur-sm border border-white/10">
+                        <div class="flex items-center mb-4">
+                            <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop"
+                                alt="Lisa Park" class="w-12 h-12 rounded-full mr-4 object-cover">
+                            <div>
+                                <h4 class="font-bold text-white">Lisa Park</h4>
+                                <p class="text-sm text-gray-400">GMAT Prep, Seoul</p>
+                            </div>
+                        </div>
+                        <p class="text-gray-300 italic">"Scored 760 on GMAT! Heading to INSEAD!"</p>
+                    </div>
+                    <div class="testimonial-card bg-white/10 backdrop-blur-sm border border-white/10">
+                        <div class="flex items-center mb-4">
+                            <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=100&h=100&fit=crop"
+                                alt="David Brown" class="w-12 h-12 rounded-full mr-4 object-cover">
+                            <div>
+                                <h4 class="font-bold text-white">David Brown</h4>
+                                <p class="text-sm text-gray-400">LSAT Prep, Toronto</p>
+                            </div>
+                        </div>
+                        <p class="text-gray-300 italic">"Scored 175 on LSAT! Got into Harvard Law!"</p>
+                    </div>
+                    <!-- Duplicated 6 cards for seamless loop -->
+                    <div class="testimonial-card bg-white/10 backdrop-blur-sm border border-white/10">
+                        <div class="flex items-center mb-4">
+                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop"
+                                alt="James Wilson" class="w-12 h-12 rounded-full mr-4 object-cover">
+                            <div>
+                                <h4 class="font-bold text-white">James Wilson</h4>
+                                <p class="text-sm text-gray-400">SAT Prep, New York</p>
+                            </div>
+                        </div>
+                        <p class="text-gray-300 italic">"Scored 1520 on SAT! Got accepted into Stanford!"</p>
+                    </div>
+                    <div class="testimonial-card bg-white/10 backdrop-blur-sm border border-white/10">
+                        <div class="flex items-center mb-4">
+                            <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop"
+                                alt="Emma Schmidt" class="w-12 h-12 rounded-full mr-4 object-cover">
+                            <div>
+                                <h4 class="font-bold text-white">Emma Schmidt</h4>
+                                <p class="text-sm text-gray-400">MCAT Prep, Berlin</p>
+                            </div>
+                        </div>
+                        <p class="text-gray-300 italic">"Went from 498 to 518 on MCAT! Heading to Harvard Medical!"</p>
+                    </div>
+                    <div class="testimonial-card bg-white/10 backdrop-blur-sm border border-white/10">
+                        <div class="flex items-center mb-4">
+                            <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=100&h=100&fit=crop"
+                                alt="Michael Chen" class="w-12 h-12 rounded-full mr-4 object-cover">
+                            <div>
+                                <h4 class="font-bold text-white">Michael Chen</h4>
+                                <p class="text-sm text-gray-400">CFA Candidate, Singapore</p>
+                            </div>
+                        </div>
+                        <p class="text-gray-300 italic">"Passed all 3 CFA levels on first attempt!"</p>
+                    </div>
+                    <div class="testimonial-card bg-white/10 backdrop-blur-sm border border-white/10">
+                        <div class="flex items-center mb-4">
+                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop"
+                                alt="Sarah Johnson" class="w-12 h-12 rounded-full mr-4 object-cover">
+                            <div>
+                                <h4 class="font-bold text-white">Sarah Johnson</h4>
+                                <p class="text-sm text-gray-400">GRE Prep, London</p>
+                            </div>
+                        </div>
+                        <p class="text-gray-300 italic">"Scored 338 on GRE! Got into Oxford!"</p>
+                    </div>
+                    <div class="testimonial-card bg-white/10 backdrop-blur-sm border border-white/10">
+                        <div class="flex items-center mb-4">
+                            <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop"
+                                alt="Lisa Park" class="w-12 h-12 rounded-full mr-4 object-cover">
+                            <div>
+                                <h4 class="font-bold text-white">Lisa Park</h4>
+                                <p class="text-sm text-gray-400">GMAT Prep, Seoul</p>
+                            </div>
+                        </div>
+                        <p class="text-gray-300 italic">"Scored 760 on GMAT! Heading to INSEAD!"</p>
+                    </div>
+                    <div class="testimonial-card bg-white/10 backdrop-blur-sm border border-white/10">
+                        <div class="flex items-center mb-4">
+                            <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=100&h=100&fit=crop"
+                                alt="David Brown" class="w-12 h-12 rounded-full mr-4 object-cover">
+                            <div>
+                                <h4 class="font-bold text-white">David Brown</h4>
+                                <p class="text-sm text-gray-400">LSAT Prep, Toronto</p>
+                            </div>
+                        </div>
+                        <p class="text-gray-300 italic">"Scored 175 on LSAT! Got into Harvard Law!"</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section id="cta-section" class="py-20 bg-slate-900/30">
+        <div class="container mx-auto px-4 text-center">
+            <div class="max-w-3xl mx-auto">
+                <h2 class="text-3xl font-bold text-white mb-6">Ready to Transform Your Study Habits?</h2>
+                <p class="text-xl text-gray-300 mb-10">
+                    Join thousands of students who are studying smarter with AI-powered personalized learning plans.
+                </p>
+                <button id="cta-button-final"
+                    class="bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 text-white px-10 py-4 rounded-lg font-medium text-lg shadow-lg mb-8 transition-all"
+                    onclick="handleSignupClick()">
+                    Create My Free Study Plan
+                </button>
+                <div class="flex justify-center space-x-4">
+                    <div class="flex items-center text-gray-300">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1 text-green-500" viewBox="0 0 20 20"
+                            fill="currentColor">
+                            <path fill-rule="evenodd"
+                                d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                                clip-rule="evenodd" />
+                        </svg>
+                        No credit card required
+                    </div>
+                    <div class="flex items-center text-gray-300">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1 text-emerald-500"
+                            viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd"
+                                d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                                clip-rule="evenodd" />
+                        </svg>
+                        Cancel anytime
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 text-white py-12 border-t border-white/10">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+                <div class="col-span-1 md:col-span-2">
+                    <a href="landing.html" class="flex items-center gap-2 mb-4 hover:opacity-80 transition-opacity">
+                        <div
+                            class="w-8 h-8 bg-gradient-to-br from-emerald-500 to-teal-600 rounded-full flex items-center justify-center text-white font-bold text-sm">
+                            SF
+                        </div>
+                        <span class="font-bold text-xl text-teal-400">StudyFlow</span>
+                    </a>
+                    <p class="text-gray-300 mb-4">
+                        AI-powered smart learning planner that creates personalized study paths to help you achieve your
+                        academic goals.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="https://www.facebook.com/" class="text-gray-400 hover:text-amber-400">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="currentColor"
+                                viewBox="0 0 24 24">
+                                <path
+                                    d="M22.675 0h-21.35c-.732 0-1.325.593-1.325 1.325v21.351c0 .731.593 1.324 1.325 1.324h11.495v-9.294h-3.128v-3.622h3.128v-2.671c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.795.143v3.24l-1.918.001c-1.504 0-1.795.715-1.795 1.763v2.313h3.587l-.467 3.622h-3.12v9.293h6.116c.73 0 1.323-.593 1.323-1.325v-21.35c0-.732-.593-1.325-1.325-1.325z" />
+                            </svg>
+                        </a>
+                        <a href="https://x.com/?lang=en" class="text-gray-400 hover:text-teal-300">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="currentColor"
+                                viewBox="0 0 24 24">
+                                <path
+                                    d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+                            </svg>
+                        </a>
+                        <a href="https://www.instagram.com/" class="text-gray-400 hover:text-pink-400">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="#FFF" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
+                                <path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z" />
+                                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="flex gap-8">
+                    <div class="flex-1">
+                        <h3 class="font-bold text-white mb-4">Product</h3>
+                        <ul class="space-y-2">
+                            <li><a href="#features"
+                                    class="text-gray-300 hover:text-white transition-colors">Features</a></li>
+                            <li><a href="auth.html" class="text-gray-300 hover:text-white transition-colors">Pricing</a>
+                            </li>
+                            <li><a href="#how-it-works" class="text-gray-300 hover:text-white transition-colors">How it
+                                    works</a></li>
+                            <li><a href="#testimonials"
+                                    class="text-gray-300 hover:text-white transition-colors">Testimonials</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="flex-1">
+                        <h3 class="font-bold text-white mb-4">Legal</h3>
+                        <ul class="space-y-2">
+                            <li><a href="privacy.html" class="text-gray-300 hover:text-white transition-colors">Privacy
+                                    Policy</a></li>
+                            <li><a href="terms.html" class="text-gray-300 hover:text-white transition-colors">Terms of
+                                    Service</a></li>
+                            <li><a href="cookie.html" class="text-gray-300 hover:text-white transition-colors">Cookie
+                                    Policy</a></li>
+                            <li><a href="contact.html" class="text-gray-300 hover:text-white transition-colors">Contact
+                                    Us</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="border-t border-gray-700 pt-8 text-center text-gray-400">
+                <p>Copyright © 2024 StudyFlow. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modal -->
+    <div id="signup-modal" class="fixed inset-0 z-50 hidden">
+        <!-- Blur Background Overlay -->
+        <div class="fixed inset-0 bg-black/60 backdrop-blur-sm" onclick="closeSignupModal()">
+        </div>
+
+        <!-- Signup Content -->
+        <div id="signup-content" class="flex min-h-full items-center justify-center p-4">
+            <div
+                class="relative bg-slate-900 border border-white/10 rounded-lg text-left overflow-hidden shadow-xl transform transition-all w-full max-w-md modal-content">
+                <div class="bg-slate-900 px-6 pt-6 pb-4">
+                    <div class="text-center">
+                        <div
+                            class="mx-auto flex items-center justify-center h-14 w-14 rounded-full bg-gradient-to-br from-teal-500 to-teal-600 mb-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 text-white" fill="none"
+                                viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" />
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-bold text-white" id="modal-title">
+                            Start Your Free Trial
+                        </h3>
+                        <p class="text-sm text-gray-400 mt-2">
+                            Create your account to generate your personalized study plan.
+                        </p>
+                    </div>
+                    <div class="mt-6">
+                        <form class="space-y-4">
+                            <div>
+                                <label for="email" class="block text-sm font-medium text-gray-300">Email
+                                    address</label>
+                                <div class="mt-1">
+                                    <input type="email" name="email" id="email"
+                                        class="shadow-sm focus:ring-teal-500 focus:border-teal-500 block w-full sm:text-sm border border-white/10 rounded-md p-2 bg-slate-800 text-white"
+                                        placeholder="you@example.com">
+                                </div>
+                            </div>
+                            <div>
+                                <label for="password" class="block text-sm font-medium text-gray-300">Password</label>
+                                <div class="mt-1">
+                                    <input type="password" name="password" id="password"
+                                        class="shadow-sm focus:ring-teal-500 focus:border-teal-500 block w-full sm:text-sm border border-white/10 rounded-md p-2 bg-slate-800 text-white"
+                                        placeholder="••••••••">
+                                </div>
+                            </div>
+                            <div>
+                                <button type="button" id="login-btn"
+                                    class="login-btn w-full flex justify-center bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 text-white py-2 px-4 rounded-md shadow-sm text-sm font-medium">
+                                    Log In
+                                </button>
+                                <p id="login-error" class="text-red-400 text-sm mt-2 text-center hidden"></p>
+                            </div>
+                            <div>
+                                <a href="auth.html" class="w-full flex justify-center btn-primary py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500">
+                                    Create Account
+                                </a>
+                            </div>
+                        </form>
+                        <div class="mt-4 text-center text-sm text-gray-400">
+                            Already have an account? <a href="auth.html"
+                                class="font-medium text-teal-400 hover:text-teal-300">Sign In</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-slate-800 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+                    <button type="button" id="close-modal"
+                        class="mt-3 w-full inline-flex justify-center rounded-md border border-white/10 shadow-sm px-4 py-2 bg-slate-700 text-base font-medium text-gray-300 hover:bg-slate-600 focus:outline-none sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
+                        onclick="closeSignupModal()">
+                        Close
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Success Animation Content (Hidden by default) -->
+        <div id="success-content" class="flex min-h-full items-center justify-center p-4 hidden">
+            <div
+                class="relative bg-slate-900 border border-white/10 rounded-lg text-left overflow-hidden shadow-xl transform transition-all w-full max-w-md modal-content p-8 text-center">
+                <div class="success-animation-wrapper mb-6">
+                    <!-- SVG Checkmark -->
+                    <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+                        <circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none" />
+                        <path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8" />
+                    </svg>
+                </div>
+                <div class="bg-emerald-500/20 text-emerald-400 px-4 py-2 rounded-lg mb-4 inline-block">
+                    <i class="fas fa-check-circle mr-2"></i>Success!
+                </div>
+                <h3 class="text-xl font-bold text-white mb-2">
+                    Account Created Successfully!
+                </h3>
+                <p class="text-gray-400 mb-6">
+                    Welcome to StudyFlow. You can now log in and start your learning journey.
+                </p>
+                <button id="success-ok-btn"
+                    class="w-full bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white py-3 px-4 rounded-lg font-medium transition-all"
+                    onclick="handleSuccessOk()">
+                    OK
+                </button>
+            </div>
+        </div>
+
+        <!-- Login Success Animation Content (Hidden by default) -->
+        <div id="login-success-content" class="flex min-h-full items-center justify-center p-4 hidden">
+            <div
+                class="relative bg-slate-900 border border-white/10 rounded-lg text-left overflow-hidden shadow-xl transform transition-all w-full max-w-md modal-content p-8 text-center">
+                <div class="success-animation-wrapper mb-6">
+                    <!-- SVG Checkmark -->
+                    <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+                        <circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none" />
+                        <path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8" />
+                    </svg>
+                </div>
+                <div class="bg-emerald-500/20 text-emerald-400 px-4 py-2 rounded-lg mb-4 inline-block">
+                    <i class="fas fa-check-circle mr-2"></i>Success!
+                </div>
+                <h3 class="text-xl font-bold text-white mb-2">
+                    Login Successful!
+                </h3>
+                <p class="text-gray-400 mb-6">
+                    Welcome back! Redirecting you to your dashboard...
+                </p>
+                <button id="login-success-ok-btn"
+                    class="w-full bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white py-3 px-4 rounded-lg font-medium transition-all"
+                    onclick="handleLoginSuccessOk()">
+                    Continue
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Load scripts -->
+    <script src="landing.js"></script>
+    <script>
+        // Mobile menu toggle
+        document.getElementById('mobile-menu-btn')?.addEventListener('click', () => {
+            document.getElementById('mobile-menu')?.classList.toggle('hidden');
+        });
+    </script>
+
+
+
+    <script>
+        // Update hero demo box with current details
+        (function () {
+            const now = new Date();
+            const hours = now.getHours();
+            const minutes = now.getMinutes();
+            const ampm = hours >= 12 ? 'PM' : 'AM';
+            const displayHours = hours % 12 || 12;
+            const displayMinutes = minutes.toString().padStart(2, '0');
+            const timeStr = displayHours + ':' + displayMinutes + ' ' + ampm;
+
+            // Update generated time
+            const generatedEl = document.getElementById('generated-time');
+            if (generatedEl) {
+                generatedEl.textContent = 'at ' + timeStr;
+            }
+
+            // Update subject days based on current time
+            const mathDay = document.getElementById('math-day');
+            const physicsDay = document.getElementById('physics-day');
+            const chemistryDay = document.getElementById('chemistry-day');
+
+            if (mathDay) mathDay.textContent = 'today';
+            if (physicsDay) physicsDay.textContent = 'tomorrow';
+            if (chemistryDay) chemistryDay.textContent = 'in 2 days';
+
+            // Update progress periodically
+            const progressEl = document.getElementById('progress-percent');
+            let progress = 65;
+
+            setInterval(function () {
+                progress = (progress + 1) % 100;
+                if (progress < 10) progress = 10;
+                if (progressEl) {
+                    progressEl.textContent = progress + '%';
+                    const progressBar = progressEl.closest('.flex').previousElementSibling.querySelector('.bg-gradient-to-r');
+                    if (progressBar) {
+                        progressBar.style.width = progress + '%';
+                    }
+                }
+            }, 5000);
+        })();
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,28 @@
+.testimonial-card {
+  background: white;
+  padding: 24px;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  flex-shrink: 0;
+  width: 320px;
+}
+
+.testimonials-slider {
+  overflow: hidden;
+}
+
+.testimonials-track {
+  display: flex;
+  gap: 32px;
+  animation: scroll 30s linear infinite;
+  width: max-content;
+}
+
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
