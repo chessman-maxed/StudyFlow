@@ -55,7 +55,7 @@ AI is thinking...
   `;
 
   const aiTextEl = document.getElementById("aiText");
-  
+
   try {
     const aiPlan = await getAIStudyPlan(planData);
 
@@ -200,7 +200,7 @@ An error occurred while generating your plan: ${error.message}
 });
 
 /* ================= AI FUNCTION ================= */
-const OPENROUTER_API_KEY = "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";
+const GEMINI_API_KEY = "AIzaSyA7yJOscN5druV-1lusbSxu2tHeiTd5wQ8";
 
 function calculateDaysUntilExam(examDate) {
   const today = new Date();
@@ -222,7 +222,7 @@ async function getAIStudyPlan(planData) {
       month: 'long',
       day: 'numeric'
     });
-    
+
     const prompt = `Generate a study plan from today (${today.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' })}) until the exam date (${examDateFormatted}). 
 Total days available: ${daysUntilExam} days.
 
@@ -232,39 +232,39 @@ Requirements:
 3. MAX 3 tasks per day
 4. Each task should be ONE specific action (10-30 minutes)
 5. Format: '### Day X (Date)' for headers, then '- **Subject**: Action - Time' for tasks
-6. Include revision sessions for weak subjects (based on confidence levels)
+6. Include revision sessions for weak subjects
 7. Example: '- **Maths**: Review chapter 1 - 15 min'
 
 User details:
 - Goal: ${planData.goal}
 - Daily study time: ${planData.dailyTime} hours
-- Weak subject: ${planData.subjects[0]}
 - Subjects: ${planData.subjects.join(', ')}
 - Difficulties: ${planData.difficulties.join(', ')}
 - Confidence levels: ${planData.confidence.join(', ')}
 - Current progress: ${planData.progress}%`;
 
-    console.log("Calling OpenRouter API...");
-    const res = await fetch("https://openrouter.ai/api/v1/chat/completions", {
-      method: "POST",
-      headers: {
-        "Authorization": `Bearer ${OPENROUTER_API_KEY}`,
-        "Content-Type": "application/json",
-        "HTTP-Referer": window.location.origin,
-        "X-Title": "StudyFlow"
-      },
-      body: JSON.stringify({
-        model: "openai/gpt-3.5-turbo",
-        messages: [
-          {
-            role: "system",
-            content: "You are an expert study planner AI. Create personalized study plans based on the number of days until the exam. Always use ALL available days. Include specific tasks with subjects and time durations."
-          },
-          { role: "user", content: prompt }
-        ],
-        temperature: 0.3
-      })
-    });
+    console.log("Calling Gemini API...");
+
+    const res = await fetch(
+      `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${GEMINI_API_KEY}`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          contents: [
+            {
+              role: "user",
+              parts: [
+                { text: prompt }
+              ]
+            }
+          ]
+        })
+      }
+    );
+
     console.log("API response status:", res.status);
 
     if (!res.ok) {
@@ -274,18 +274,16 @@ User details:
     }
 
     const data = await res.json();
-    if (data.choices && data.choices[0] && data.choices[0].message && data.choices[0].message.content) {
-      return data.choices[0].message.content;
+
+    if (data.candidates && data.candidates[0] && data.candidates[0].content.parts[0].text) {
+      return data.candidates[0].content.parts[0].text;
     } else {
       console.error("Invalid API response:", data);
-      return "⚠️ Error: Invalid response from AI service. Please try again.";
+      return "⚠️ Error: Invalid response from AI service.";
     }
+
   } catch (error) {
     console.error("Error in getAIStudyPlan:", error);
     return `⚠️ Error: ${error.message}. Please check your connection and try again.`;
   }
 }
-
-
-
-
