@@ -200,7 +200,7 @@ An error occurred while generating your plan: ${error.message}
 });
 
 /* ================= AI FUNCTION ================= */
-const GEMINI_API_KEY = "AIzaSyA7yJOscN5druV-1lusbSxu2tHeiTd5wQ8";
+const GEMINI_API_KEY = "AIzaSyBhquNIiKb4snxIOWhwtHdj4NOfUl-Rxe4";
 
 function calculateDaysUntilExam(examDate) {
   const today = new Date();
