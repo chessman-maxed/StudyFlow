@@ -61,6 +61,7 @@ To keep your API keys secure, set the following environment variables in your **
 | Variable | Description |
 | :--- | :--- |
 | `GEMINI_API_KEY` | Your Google Gemini API Key |
+| `OPENROUTER_API_KEY` | Your OpenRouter API Key (for Chat) |
 | `FIREBASE_API_KEY` | Firebase API Key |
 | `FIREBASE_AUTH_DOMAIN` | Firebase Auth Domain |
 | `FIREBASE_PROJECT_ID` | Firebase Project ID |

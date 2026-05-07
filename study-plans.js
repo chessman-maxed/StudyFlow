@@ -169,8 +169,6 @@ document.addEventListener('DOMContentLoaded', () => {
     updateChatTheme();
 
     // Chat Functionality
-    const OPENROUTER_API_KEY = "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";
-
     function savePlan(newPlan) {
         localStorage.setItem('currentStudyPlan', newPlan);
         // Clear progress when plan is modified (new tasks = new IDs)
@@ -210,16 +208,12 @@ Answer their questions specifically based on this plan context. Keep answers con
         }
 
         try {
-            const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
+            const response = await fetch("/api/study-chat", {
                 method: "POST",
                 headers: {
-                    "Authorization": `Bearer ${OPENROUTER_API_KEY}`,
-                    "Content-Type": "application/json",
-                    "HTTP-Referer": "http://localhost",
-                    "X-Title": "StudyFlow"
+                    "Content-Type": "application/json"
                 },
                 body: JSON.stringify({
-                    model: "openai/gpt-3.5-turbo",
                     messages: [
                         { role: "system", content: systemPrompt },
                         { role: "user", content: userMessage }
@@ -228,6 +222,12 @@ Answer their questions specifically based on this plan context. Keep answers con
             });
 
             const data = await response.json();
+            
+            if (!data.choices || !data.choices[0]) {
+                console.error("Invalid AI response structure:", data);
+                return "I'm having trouble processing that right now. Please try again!";
+            }
+
             let aiResponse = data.choices[0].message.content;
             
             // Check if AI modified the plan

@@ -1,10 +1,10 @@
 // Firebase Configuration - Centralized
 // These will be replaced by environment variables during deployment
 export const firebaseConfig = {
-  apiKey: "PLACEHOLDER_FIREBASE_API_KEY",
-  authDomain: "PLACEHOLDER_FIREBASE_AUTH_DOMAIN",
-  projectId: "PLACEHOLDER_FIREBASE_PROJECT_ID",
-  storageBucket: "PLACEHOLDER_FIREBASE_STORAGE_BUCKET",
-  messagingSenderId: "PLACEHOLDER_FIREBASE_MESSAGING_SENDER_ID",
-  appId: "PLACEHOLDER_FIREBASE_APP_ID"
+  apiKey: "AIzaSyCWm4s24hFeCN_GNC9RRsz7jzm4-0RZbgI",
+  authDomain: "smart-learning-planner1.firebaseapp.com",
+  projectId: "smart-learning-planner1",
+  storageBucket: "smart-learning-planner1.firebasestorage.app",
+  messagingSenderId: "704749613324",
+  appId: "1:704749613324:web:bdf4778de32d0cffe7d929"
 };
