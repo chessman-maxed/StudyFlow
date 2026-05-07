@@ -79,7 +79,7 @@ AI is thinking...
 
       // Optional: Save to Firebase here if needed (already happening for raw data in submit handler)
 
-      window.location.href = "study plans.html";
+      window.location.href = "study-plans.html";
     };
 
     btnContainer.appendChild(regenBtn);
