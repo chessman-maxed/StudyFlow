@@ -7,14 +7,7 @@ import {
   browserLocalPersistence
 } from "https://www.gstatic.com/firebasejs/12.7.0/firebase-auth.js";
 
-const firebaseConfig = {
-  apiKey: "AIzaSyCWm4s24hFeCN_GNC9RRsz7jzm4-0RZbgI",
-  authDomain: "smart-learning-planner1.firebaseapp.com",
-  projectId: "smart-learning-planner1",
-  storageBucket: "smart-learning-planner1.firebasestorage.app",
-  messagingSenderId: "704749613324",
-  appId: "1:704749613324:web:bdf4778de32d0cffe7d929"
-};
+import { firebaseConfig } from "./firebase-config.js";
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);

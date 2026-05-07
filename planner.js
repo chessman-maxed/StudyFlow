@@ -2,15 +2,7 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.7.0/firebase-app.js";
 import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/12.7.0/firebase-firestore.js";
 import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.7.0/firebase-auth.js";
-
-const firebaseConfig = {
-  apiKey: "AIzaSyCWm4s24hFeCN_GNC9RRsz7jzm4-0RZbgI",
-  authDomain: "smart-learning-planner1.firebaseapp.com",
-  projectId: "smart-learning-planner1",
-  storageBucket: "smart-learning-planner1.firebasestorage.app",
-  messagingSenderId: "704749613324",
-  appId: "1:704749613324:web:bdf4778de32d0cffe7d929"
-};
+import { firebaseConfig } from "./firebase-config.js";
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
@@ -200,7 +192,6 @@ An error occurred while generating your plan: ${error.message}
 });
 
 /* ================= AI FUNCTION ================= */
-const GEMINI_API_KEY = "AIzaSyBhquNIiKb4snxIOWhwtHdj4NOfUl-Rxe4";
 
 function calculateDaysUntilExam(examDate) {
   const today = new Date();
@@ -243,40 +234,27 @@ User details:
 - Confidence levels: ${planData.confidence.join(', ')}
 - Current progress: ${planData.progress}%`;
 
-    console.log("Calling Gemini API...");
+    console.log("Calling Secure API Endpoint...");
 
-    const res = await fetch(
-      `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${GEMINI_API_KEY}`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          contents: [
-            {
-              role: "user",
-              parts: [
-                { text: prompt }
-              ]
-            }
-          ]
-        })
-      }
-    );
+    const res = await fetch("/api/generate-plan", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ prompt })
+    });
 
     console.log("API response status:", res.status);
 
-    if (!res.ok) {
-      const errorText = await res.text();
-      console.error("API Error:", res.status, errorText);
-      return `⚠️ Error generating plan. Please try again later. (Status: ${res.status})`;
-    }
-
     const data = await res.json();
 
-    if (data.candidates && data.candidates[0] && data.candidates[0].content.parts[0].text) {
-      return data.candidates[0].content.parts[0].text;
+    if (!res.ok) {
+      console.error("API Error:", res.status, data.error);
+      return `⚠️ Error generating plan. Please try again later. (Error: ${data.error || 'Unknown error'})`;
+    }
+
+    if (data.text) {
+      return data.text;
     } else {
       console.error("Invalid API response:", data);
       return "⚠️ Error: Invalid response from AI service.";

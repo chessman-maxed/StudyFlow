@@ -49,7 +49,27 @@ StudyFlow is a premium, AI-driven study management application designed to help 
 
 1. Clone the repository.
 2. Open `index.html` in any modern browser.
-3. No build step required (Vanilla JS & Tailwind via CDN).
+3. No build step required for local preview.
+
+## ☁️ Vercel Deployment & Security
+
+This project is optimized for Vercel and includes a secure backend for AI generation.
+
+### 1. Environment Variables
+To keep your API keys secure, set the following environment variables in your **Vercel Dashboard** under **Project Settings > Environment Variables**:
+
+| Variable | Description |
+| :--- | :--- |
+| `GEMINI_API_KEY` | Your Google Gemini API Key |
+| `FIREBASE_API_KEY` | Firebase API Key |
+| `FIREBASE_AUTH_DOMAIN` | Firebase Auth Domain |
+| `FIREBASE_PROJECT_ID` | Firebase Project ID |
+| `FIREBASE_STORAGE_BUCKET` | Firebase Storage Bucket |
+| `FIREBASE_MESSAGING_SENDER_ID` | Firebase Messaging Sender ID |
+| `FIREBASE_APP_ID` | Firebase App ID |
+
+### 2. Automatic Injection
+During the Vercel build process, the `setup-env.js` script will automatically inject these variables into `firebase-config.js`. The Gemini API calls are routed through a secure Serverless Function (`/api/generate-plan.js`) so your AI key is never exposed to the browser.
 
 ---
 *Created with ❤️ by the StudyFlow Team*

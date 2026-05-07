@@ -1,0 +1,7 @@
+{
+  "name": "studyflow",
+  "version": "1.0.0",
+  "scripts": {
+    "build": "node setup-env.js"
+  }
+}
