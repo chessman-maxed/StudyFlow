@@ -21,6 +21,13 @@ const server = http.createServer(async (req, res) => {
     const parsedUrl = url.parse(req.url, true);
     let pathname = parsedUrl.pathname;
 
+    // Helper to send JSON responses safely
+    const sendJSON = (status, data) => {
+        if (res.headersSent) return;
+        res.writeHead(status, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify(data));
+    };
+
     // --- API ROUTES ---
     
     // 1. Gemini AI Plan Generation
@@ -31,17 +38,28 @@ const server = http.createServer(async (req, res) => {
             try {
                 const { prompt } = JSON.parse(body);
                 const apiKey = process.env.GEMINI_API_KEY;
+                
+                if (!apiKey) throw new Error("GEMINI_API_KEY is missing in .env");
+
                 const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ contents: [{ role: "user", parts: [{ text: prompt }] }] })
                 });
+                
                 const data = await response.json();
-                res.writeHead(200, { 'Content-Type': 'application/json' });
-                res.end(JSON.stringify({ text: data.candidates[0].content.parts[0].text }));
+                
+                if (data.error) throw new Error(data.error.message || "Gemini API Error");
+
+                if (data.candidates && data.candidates[0]?.content?.parts?.[0]?.text) {
+                    sendJSON(200, { text: data.candidates[0].content.parts[0].text });
+                } else {
+                    console.error("Gemini Unexpected Structure:", JSON.stringify(data));
+                    throw new Error("Invalid response structure from Gemini");
+                }
             } catch (err) {
-                res.writeHead(500, { 'Content-Type': 'application/json' });
-                res.end(JSON.stringify({ error: err.message }));
+                console.error("API /generate-plan Error:", err.message);
+                sendJSON(500, { error: err.message });
             }
         });
         return;
@@ -55,9 +73,9 @@ const server = http.createServer(async (req, res) => {
             try {
                 const { messages } = JSON.parse(body);
                 const apiKey = process.env.OPENROUTER_API_KEY;
-                if (!apiKey) {
-                    console.error("Error: OPENROUTER_API_KEY not found in process.env");
-                }
+                
+                if (!apiKey) throw new Error("OPENROUTER_API_KEY is missing in .env");
+
                 const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
                     method: "POST",
                     headers: {
@@ -68,12 +86,20 @@ const server = http.createServer(async (req, res) => {
                     },
                     body: JSON.stringify({ model: "openai/gpt-3.5-turbo", messages })
                 });
+                
                 const data = await response.json();
-                res.writeHead(200, { 'Content-Type': 'application/json' });
-                res.end(JSON.stringify(data));
+                
+                if (data.error) throw new Error(data.error.message || "OpenRouter Error");
+
+                if (data.choices && data.choices[0]) {
+                    sendJSON(200, data);
+                } else {
+                    console.error("OpenRouter Unexpected Structure:", JSON.stringify(data));
+                    throw new Error("Invalid response structure from OpenRouter");
+                }
             } catch (err) {
-                res.writeHead(500, { 'Content-Type': 'application/json' });
-                res.end(JSON.stringify({ error: err.message }));
+                console.error("API /study-chat Error:", err.message);
+                sendJSON(500, { error: err.message });
             }
         });
         return;
@@ -113,10 +139,8 @@ const server = http.createServer(async (req, res) => {
 
 server.listen(PORT, () => {
     console.log(`
-🚀 StudyFlow Local Server Running!
-----------------------------------
-Local URL: http://localhost:${PORT}
-
-(Note: AI features will now work perfectly!)
+🚀 StudyFlow Local Server Re-Started!
+-------------------------------------
+URL: http://localhost:${PORT}
     `);
 });
