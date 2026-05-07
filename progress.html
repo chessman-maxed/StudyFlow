@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Progress Tracker - StudyFlow</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <link rel="stylesheet" href="progress.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.net.min.js"></script>
+</head>
+
+<body class="min-h-screen">
+    <div id="vanta-bg" class="fixed inset-0 z-[-1]"></div>
+
+    <nav class="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-6 py-3 flex justify-between items-center">
+            <div class="flex items-center gap-2 text-teal-400 font-bold text-2xl">
+                <i class="fas fa-graduation-cap"></i>
+                StudyFlow
+            </div>
+
+            <div class="hidden md:flex items-center space-x-6">
+                <a href="study plans.html" class="font-medium transition-colors">
+                    <i class="fas fa-columns mr-1"></i>Dashboard
+                </a>
+                <a href="planner.html" class="font-medium transition-colors">
+                    <i class="fas fa-plus-circle mr-1"></i>New Plan
+                </a>
+                <button class="theme-toggle" id="themeToggleDesktop" title="Switch Theme">
+                    <i class="fas fa-sun"></i>
+                </button>
+            </div>
+
+            <button id="mobile-menu-btn" class="md:hidden">
+                <i class="fas fa-bars text-xl"></i>
+            </button>
+        </div>
+
+        <div id="mobile-menu" class="md:hidden nav-mobile hidden px-6 pb-4 space-y-3">
+            <a href="study plans.html" class="block py-2">
+                <i class="fas fa-columns mr-2"></i>Dashboard
+            </a>
+            <a href="planner.html" class="block py-2">
+                <i class="fas fa-plus-circle mr-2"></i>New Plan
+            </a>
+            <button class="theme-toggle w-full justify-start text-left py-2" id="themeToggleMobile">
+                <i class="fas fa-sun mr-2"></i>Theme
+            </button>
+        </div>
+    </nav>
+
+    <div class="pt-24 pb-12 px-4 max-w-7xl mx-auto space-y-6">
+
+        <!-- HEADER -->
+        <div class="glass-card p-6 md:p-8">
+            <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+                <div>
+                    <h1 class="text-2xl md:text-3xl font-bold flex items-center gap-3">
+                        <i class="fas fa-chart-line text-amber-400"></i>
+                        Your Progress
+                    </h1>
+                    <p class="mt-1">Track your learning journey</p>
+                </div>
+                <div class="flex items-center gap-4">
+                    <div class="glass-card px-4 py-2 flex items-center gap-2">
+                        <div class="pulse-dot"></div>
+                        <span class="text-sm" id="taskCount">0 tasks</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Flowchart -->
+            <div class="mt-8 relative">
+                <div class="flow-line rounded-full h-1">
+                    <div id="flowProgress" class="flow-line-progress rounded-full h-full" style="width: 0%"></div>
+                </div>
+                <div id="flowSteps" class="flex justify-between relative z-10 pt-4">
+                    <div class="text-sm">Loading...</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- STATS CARDS -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
+            <!-- Progress Ring -->
+            <div class="stat-card glass-card p-6">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="font-semibold">Completion</h3>
+                    <i class="fas fa-circle-check text-green-400"></i>
+                </div>
+                <div class="relative h-32 flex items-center justify-center">
+                    <svg class="progress-ring w-32 h-32">
+                        <circle cx="64" cy="64" r="56" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="8"/>
+                        <circle id="progressRing" cx="64" cy="64" r="56" fill="none" stroke="url(#gradient)" stroke-width="8" stroke-linecap="round" stroke-dasharray="351.86" stroke-dashoffset="351.86" transform="rotate(-90 64 64)"/>
+                        <defs>
+                            <linearGradient id="gradient" x1="0%" y1="0%" x2="100%">
+                                <stop offset="0%" stop-color="#0F766E"/>
+                                <stop offset="100%" stop-color="#10B981"/>
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                    <div class="absolute inset-0 flex items-center justify-center flex-col">
+                        <span id="progressPercent" class="text-3xl font-bold">0%</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Productivity Chart -->
+            <div class="stat-card glass-card p-6">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="font-semibold">Productivity</h3>
+                    <i class="fas fa-bolt text-yellow-400"></i>
+                </div>
+                <div class="h-32">
+                    <canvas id="velocityChart"></canvas>
+                </div>
+            </div>
+
+            <!-- Focus Areas Chart -->
+            <div class="stat-card glass-card p-6">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="font-semibold">Focus Areas</h3>
+                    <i class="fas fa-bullseye text-amber-400"></i>
+                </div>
+                <div class="h-32">
+                    <canvas id="subjectChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- TASKS LIST -->
+        <div class="glass-card p-6 md:p-8">
+            <div class="flex items-center justify-between mb-6">
+                <h2 class="text-xl font-bold flex items-center">
+                    <i class="fas fa-list-check text-green-400 mr-3"></i>
+                    Today's Tasks
+                </h2>
+                <span id="completedCount" class="text-sm">0 / 0 completed</span>
+            </div>
+
+            <div id="taskList" class="space-y-3">
+                <div class="text-center py-8">
+                    <i class="fas fa-spinner fa-spin text-2xl mb-3"></i>
+                    <p>Loading your tasks...</p>
+                </div>
+            </div>
+
+            <div class="mt-8 flex justify-center">
+                <button id="finishBtn" class="finish-btn px-8 py-3 rounded-xl font-bold text-lg disabled:opacity-50 disabled:cursor-not-allowed" disabled>
+                    <i class="fas fa-flag-checkered mr-2"></i>
+                    <span>Finish Plan</span>
+                </button>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- CONGRATS MODAL -->
+    <div id="congratsModal" class="fixed inset-0 z-[100] hidden flex items-center justify-center p-4">
+        <div class="absolute inset-0 bg-black/70 backdrop-blur-sm" id="congratsBackdrop"></div>
+        <div class="relative glass-card p-8 max-w-md w-full text-center transform transition-all scale-95 opacity-0" id="congratsContent">
+            <div class="mb-6">
+                <div class="w-24 h-24 mx-auto mb-4 relative">
+                    <div class="absolute inset-0 bg-green-500 rounded-full animate-ping opacity-20"></div>
+                    <div class="relative w-full h-full bg-green-500 rounded-full flex items-center justify-center">
+                        <i class="fas fa-trophy text-4xl text-white"></i>
+                    </div>
+                </div>
+                <h2 class="text-3xl font-bold mb-2">Amazing!</h2>
+                <p>You've completed all your tasks!</p>
+            </div>
+            <div class="flex gap-4 justify-center">
+                <button id="closeModalBtn" class="px-6 py-2 bg-white/10 hover:bg-white/20 rounded-lg transition-colors">
+                    Close
+                </button>
+                <a href="planner.html" class="px-6 py-2 bg-gradient-to-r from-emerald-500 to-teal-600 hover:scale-105 transition-transform rounded-lg text-white font-bold">
+                    New Plan
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script src="progress.js"></script>
+
+    <!-- Theme Script -->
+    <script src="theme.js"></script>
+
+
+</body>
+
+</html>
