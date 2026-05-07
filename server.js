@@ -55,11 +55,15 @@ const server = http.createServer(async (req, res) => {
             try {
                 const { messages } = JSON.parse(body);
                 const apiKey = process.env.OPENROUTER_API_KEY;
+                if (!apiKey) {
+                    console.error("Error: OPENROUTER_API_KEY not found in process.env");
+                }
                 const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
                     method: "POST",
                     headers: {
                         "Authorization": `Bearer ${apiKey}`,
                         "Content-Type": "application/json",
+                        "HTTP-Referer": "http://localhost:3000",
                         "X-Title": "StudyFlow"
                     },
                     body: JSON.stringify({ model: "openai/gpt-3.5-turbo", messages })
